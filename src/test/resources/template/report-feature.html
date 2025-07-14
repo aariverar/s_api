@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="title-report">SCB Report</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark text-light bg-dark fixed-top" id="navigation">
+        <div class="container-fluid">
+            <p class="navbar-text navbar-left text-center">Reporte de Automatización - SCB</p>
+            <div id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a id ="navbar-features-link" class="nav-link text-link-navbar" href="overview-features.html">Features</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container content-page">
+        <div class="element">
+            <div class="d-flex flex-row justify-content-around title-and-logo">
+                <div id="logo-mibanco">
+                    <img src="logo_mibanco.png" alt="Logo" height="90">
+                </div>
+                <div id="table-project" class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Equipo</th>
+                                <th scope="col">Fecha del reporte</th>                       
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <td>Automatización SCB</td>
+                                <td>{{date}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="element">
+            <div id="feature-report">
+                <div>
+                    <h2>{{ feature.feature_name }}</h2>
+                </div>
+                <div class="statistics-feature-box justify-content-center d-flex flex-row justify-content-around align-items-center table-and-chart">
+                    <div id="table-report-status" class="col align-items-center">
+                        <table class = "table table-bordered align-items-center text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col" colspan="4">Scenarios</th>
+                                    <th scope="col" colspan="4">Steps</th>                       
+                                </tr>
+                            </thead>  
+                            <tbody>
+                                <tr>
+                                    <td class="text-dark fw-bold bg-passed">Passed</td>
+                                    <td class="text-dark fw-bold bg-failed">Failed</td>
+                                    <td class="text-dark fw-bold bg-skipped">Skipped</td>
+                                    <td>Total</td>
+                                    <td class="text-dark fw-bold bg-passed">Passed</td>
+                                    <td class="text-dark fw-bold bg-failed">Failed</td>
+                                    <td class="text-dark fw-bold bg-skipped">Skipped</td>
+                                    <td>Total</td>
+                                </tr>
+                                <tr>
+                                    <td>{{feature.scenario_passed_count}}</td>
+                                    <td>{{feature.scenario_failed_count}}</td>
+                                    <td>{{feature.scenario_skipped_count}}</td>
+                                    <td>{{feature.scenarios_total}}</td>
+                                    <td>{{feature.step_passed_count}}</td>
+                                    <td>{{feature.step_failed_count}}</td>
+                                    <td>{{feature.step_skipped_count}}</td>
+                                    <td>{{feature.steps_total}}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="carouselExampleIndicators" class="carousel slide chart-canvas-style carousel-dark justify-content-center d-flex flex-row align-items-center" data-bs-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+                            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-bs-interval="2000">
+                                <canvas class="chart-scenarios"
+                                    data-passed="{{ feature.scenario_passed_count }}"
+                                    data-failed="{{ feature.scenario_failed_count }}"
+                                    data-skipped="{{ feature.scenario_skipped_count }}"
+                                    data-feature-name="{{ feature.feature_name }}">
+                                </canvas>
+                            </div>
+                            <div class="carousel-item" data-bs-interval="2000">
+                                <canvas class="chart-steps"
+                                    data-passed="{{ feature.step_passed_count }}"
+                                    data-failed="{{ feature.step_failed_count}}"
+                                    data-skipped="{{ feature.step_skipped_count}}"
+                                    data-feature-name="{{ feature.feature_name }}">
+                                </canvas>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                {% for scenario in feature.scenarios %}
+                    {% set scenario_index = loop.index %}
+                    <div class="card">
+                        <div id="scenario-box-{{feature_index}}-{{scenario_index}}"data-bs-toggle="collapse" class="collapsable-control card-body d-flex flex-row justify-content-between collapsed bg-{{scenario.status}} scenario-card" data-bs-target="#element-{{feature_index}}-{{scenario_index}}" aria-expanded="false" aria-controls="element-{{feature_index}}{{scenario_index}}">
+                            <div>
+                                <span id="scenario-subtitle-text-{{feature_index}}-{{scenario_index}}" class="keyword indention">Scenario</span>
+                                <span id="scenario-name-text-{{feature_index}}-{{scenario_index}}" class="name">{{scenario.name}}</span>
+                                <i id="scenario-row-icon-{{feature_index}}-{{scenario_index}}" class="fa fa-chevron-right fa-fw"></i>
+                            </div>                        
+                            <div>
+                                <span id = "scenario-status-text-{{feature_index}}-{{scenario_index}}" class="lead-duration duration keyword indention">{{scenario.status}}</span>
+                            </div>      
+                        </div>
+                        <div id="element-{{feature_index}}-{{scenario_index}}" class=" collapsable-details collapse" aria-expanded="true">
+                            <div class="steps inner-level">
+                                <div data-bs-toggle="collapse" class="steps-box bg-{{scenario.status}} collapsed collapsable-control" data-bs-target="#steps-{{feature_index}}-{{scenario_index}}" aria-expanded="false">
+                                    <div class="steps-box">
+                                        <span id="step-subtitle-text-{{feature_index}}-{{scenario_index}}" class="keyword indention">Steps</span>
+                                        <i id="step-row-icon-{{feature_index}}-{{scenario_index}}" class="fa fa-chevron-right fa-fw"></i>
+                                    </div>
+                                </div>
+                                <div id="steps-{{feature_index}}-{{scenario_index}}" class="inner-level collapsable-details collapse" aria-expanded="false">
+                                    {% for step in scenario.steps %}
+                                    {% set step_index = loop.index %}
+                                    <div>
+                                        <div id="step-box-{{feature_index}}-{{scenario_index}}-{{step_index}}" class="step-name-{{step.keyword}} bg-{{step.status}} step-box">
+                                            <span id="step-keyword-text-{{feature_index}}-{{scenario_index}}-{{step_index}}" class="keyword indention">{{step.keyword}}</span>
+                                            <span id="step-name-text-{{feature_index}}-{{scenario_index}}-{{step_index}}" class="name">{{step.name}}</span>
+                                            <span id="step-duration-text-{{feature_index}}-{{scenario_index}}-{{step_index}}" class="lead-duration duration">{{step.duration}}</span>
+                                        </div>
+                                        <div class="inner-level">
+                                            <div class="docstring indention">
+                                                <div>
+                                                    <a id="step-msg-link-{{feature_index}}-{{scenario_index}}-{{step_index}}" data-bs-toggle="collapse" class="collapsable-control" href="#step-msg-{{feature_index}}-{{scenario_index}}-{{step_index}}">Doc string</a>
+                                                </div>
+                                                <div id="step-msg-{{feature_index}}-{{scenario_index}}-{{step_index}}" class="collapse collapsable-details card bg-light">
+                                                    <pre style="max-width: 1000px; overflow: hidden; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word;" id="step-msg-content-{{feature_index}}-{{scenario_index}}-{{step_index}}" class="card-body step-message">{{ step.message }}</pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="text-end">
+            <span class="text-muted">Reporte HTML generado por SCB.</span>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+$(document).ready(function(){
+    $('.collapsable-control').on('click', function() {
+        var icon = $(this).find('i');
+        if (icon.hasClass('fa-chevron-right')) {
+            icon.removeClass('fa-chevron-right');
+            icon.addClass('fa-chevron-down');
+        } else {
+            icon.removeClass('fa-chevron-down');
+            icon.addClass('fa-chevron-right');
+        }
+    });
+});
+</script>
+</body>
+</html>

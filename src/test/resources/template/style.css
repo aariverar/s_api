@@ -1,0 +1,250 @@
+.card-body-limited{
+    max-width: 50px
+}
+
+.body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #101010;
+}
+
+.content-page{
+    margin-top: 100px;
+}
+
+.navbar-text{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+}
+.text-link-navbar{
+    font-size: 18px;
+}
+.nav-link{
+    padding-right: 1.5rem !important;
+}
+.lead-duration {
+    float: right;
+    padding-right: 15px;
+}
+
+.collapsable-control {
+    cursor: pointer;
+}
+
+.collapsed .chevron:after {
+    content: "\f054";
+}
+.keyword {
+    font-weight: bold;
+}
+.indention {
+    padding-left: 3px;
+}
+.lead-duration {
+    float: right;
+    padding-right: 15px;
+}
+.description, .comment {
+    font-style: italic;
+    background-color: beige;
+    white-space: pre;
+}
+.inner-level {
+    margin-top: 5px;
+    margin-left: 20px;
+    padding-bottom: 2px;
+    padding-left: 1px;
+}
+
+#feature-report {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fdfdfd;
+    justify-content: center;
+}
+
+#features-statistics-report > div{
+    margin:20px 20px 30px 20px;
+}
+
+#features-statistics-report{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color:  #fbf6f6f8;
+}
+
+#table-project{
+margin: 20px;
+}
+
+#table-report-status{
+    width: 70% !important;
+}
+
+.statistics-feature-box{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.bg-passed{
+    background-color:  rgba(75, 192, 120, 0.2) !important ;
+
+}
+
+.bg-failed{
+   background-color: rgba(255, 99, 132, 0.2) !important ;
+
+}
+
+.bg-skipped{
+    background-color: #ede9e9c5 !important ;
+}
+
+.chart-canvas-style{
+    width: 300px;
+    height: 300px;
+    max-width: 30% !important;
+    margin-left: 40px !important;
+}
+.scenario-box{
+    margin: 30px;
+    box-shadow: -1px 0 lightgray;
+    transition: box-shadow 0.3s;
+}
+
+.steps-box{
+    margin-top:20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.step-box{
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
+.table-and-chart, .title-and-logo{
+    margin-bottom: 30px;
+}
+
+.step-message{
+    margin-bottom: 10px !important;
+    padding: 10px !important;
+}
+
+#table-project{
+    width: 60%;
+}
+
+.logo-mibanco{
+    width: 40%;
+}
+
+.subtitles-text{
+    color: #666666;
+    box-sizing: border-box;
+}
+
+.card-body .rotate {
+    z-index: 8;
+    float: right;
+    height: 100%;
+}
+.card-body .rotate i {
+    position: absolute;
+    left: 0;
+    left: auto;
+    right: -10px;
+    bottom: 0;
+    display: block;
+    -webkit-transform: rotate(-44deg);
+    -moz-transform: rotate(-44deg);
+    -o-transform: rotate(-44deg);
+    -ms-transform: rotate(-44deg);
+    transform: rotate(-44deg);
+    color:  rgba(201, 209, 208, 0.412);
+}
+
+#features-statistics-1 {
+    height: 100%;
+    width: 50%;
+}
+
+#features-statistics-2{
+    width:30%;
+    height: 100%;
+}
+
+#features-statistics-2 > div{
+    width: 100%;
+    height: 50%;
+}
+
+.assertions-card, #chart-scenarios-cards, #summary-widgets-features > div, #execution-time-cards > div{
+    border: 2px solid #c8c6c6c5 !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 10px !important;
+}
+
+#execution-time-cards > div{
+    width: 48%;
+    height: 120px;
+}
+
+#assertions-summary-cards > div{
+    width: 100%;
+}
+
+.assertions-card, #chart-scenarios-cards{
+    margin-bottom: 20px;
+}
+
+#chart-scenarios-cards{
+    width: 100%;
+    max-width: 380px !important;
+    max-height: 380px !important;
+    min-width: 200px !important;
+}
+#summary-widgets-features > div{
+    width: 30%;
+}
+
+#assertions-summary-cards, #summary-widgets-features{
+    width: 100%;
+}
+
+#features-dashboard{
+    margin-bottom: 20px;
+    background-color: #fbf6f6f8;
+}
+
+.assertions-card{
+    height: 150px !important;
+}
+
+footer{
+    background-color: #fbf6f6f8;
+    border: 1px solid #e7e7e7a0;
+    padding: 20px;
+}
+
+@media (min-width: 1400) {
+    .container {
+        max-width: 90%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 90%;
+    }
+}

@@ -1,0 +1,26 @@
+node_modules/
+allure-results/
+allure-report/
+screenshots/
+Evidencias/
+**/__pycache__/
+
+# Test outputs
+*.xml
+*.pretty.output
+json.pretty.output
+New.pretty.output
+output.xml
+
+# Configuration files with sensitive data
+service.properties
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db

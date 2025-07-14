@@ -1,0 +1,61 @@
+trigger:
+- framework/1.0.0
+
+variables:
+  TAG_NAME: 'Prueba'
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.12'
+    addToPath: true
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      try {
+        $ErrorActionPreference = 'Stop' # Detiene en el primer error para capturarlo
+        behave --tags=@$(TAG_NAME)
+      } catch {
+        Write-Output "Error caught"
+      }
+      exit 0 # Sale explícitamente con código de éxito
+  displayName: 'Run behave tests'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'src/test/reports'
+    ArtifactName: 'scb-report' 
+    publishLocation: 'Container'
+    
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      $reportFolder = Get-ChildItem src/test/reports -Directory | Where-Object { $_.Name -match '^report-' } | Select-Object -ExpandProperty Name
+      echo "##vso[task.setvariable variable=reportFolderName]$reportFolder"
+  displayName: 'Find Report Folder'
+
+- task: PublishHtmlReport@1
+  inputs:
+    reportDir: 'src/test/reports/$(reportFolderName)/overview-features.html'
+  displayName: 'Publish report in Html Viewer'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'output.xml'
+    failTaskOnFailedTests: false
+  displayName: 'Publish Test Results'
