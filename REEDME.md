@@ -1,4 +1,23 @@
+
 # QA API Automation Framework
+## Requisitos Previos
+
+- Python 3.8 o superior
+- pip (gestor de paquetes de Python)
+- Recomendado: entorno virtual (venv)
+
+## Instalación
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/aariverar/s_api.git
+   cd s_api
+   ```
+2. Instala las dependencias:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 
 ## Descripción General
 
@@ -6,9 +25,6 @@ Framework para automatización de pruebas de APIs REST utilizando Python, Behave
 
 ---
 
-## Estructura del Proyecto
-
-<!---
 src/
   test/
     app/           # Lógica de la aplicación y utilidades
@@ -16,7 +32,56 @@ src/
     library/       # Librerías utilitarias, generación de reportes y evidencias
     reports/       # Reportes HTML y evidencias generadas
     resources/     # Plantillas, datos de prueba, drivers
--->
+
+## Estructura del Proyecto
+
+```
+src/
+  test/
+    app/           # Lógica de la aplicación y utilidades
+    features/      # Features Gherkin, steps y hooks
+    library/       # Librerías utilitarias, generación de reportes y evidencias
+    reports/       # Reportes HTML y evidencias generadas
+    resources/     # Plantillas, datos de prueba, drivers
+```
+
+## Ejemplo de Feature y Step
+
+**Feature (src/test/features/api_test.feature):**
+```gherkin
+Feature: Prueba de API
+  Scenario: Validar respuesta exitosa
+    Given se extrae los datos del servicio del excel "1"
+    When cuando envio una peticion al servicio "1"
+    Then se valida el status code obtenido con el status code esperado "1"
+```
+
+**Step (src/test/features/steps/api_steps.py):**
+```python
+from behave import given, when, then
+
+@given('se extrae los datos del servicio del excel "{datos}"')
+def step_given(context, datos):
+    # Implementación aquí
+    pass
+```
+
+## Integración Continua
+
+Este framework está preparado para integrarse con Azure Pipelines. Consulta el archivo `azure-pipelines.yml` para detalles de configuración y despliegue automático.
+
+## Contribuciones
+
+¿Quieres mejorar el framework? ¡Bienvenido! Por favor:
+- Crea un fork y una rama para tu mejora.
+- Haz pull requests descriptivos.
+- Sigue las convenciones de código y agrega comentarios donde sea necesario.
+- Reporta bugs o solicita features usando Issues.
+
+## Licencia
+
+Este proyecto es privado y de uso exclusivo para el equipo de QA de SCB. No distribuir sin autorización.
+
 
 ---
 
@@ -34,9 +99,16 @@ Esto elimina temporales, caché y evidencias antiguas de forma segura.
 
 ### 2. Ejecución secuencial (Behave)
 
+
 <!--- bash
-python limpieza.py && behave --tags=@TuTag --no-capture
+python limpieza.py && python run_Test.py @TuTag
 -->
+
+O también puedes ejecutar simplemente:
+```bash
+python limpieza.py && python run_Test.py
+```
+El script te pedirá el tag a ejecutar (por defecto @Santander).
 
 ### 3. Ejecución paralela (Behavex)
 
